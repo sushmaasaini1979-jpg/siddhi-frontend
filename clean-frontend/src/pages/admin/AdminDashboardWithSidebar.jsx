@@ -11,7 +11,8 @@ const AdminDashboardWithSidebar = () => {
   // Manual refresh function
   const handleRefresh = async () => {
     try {
-      const response = await fetch(`/api/admin-supabase/dashboard?store=siddhi&period=${timeFilter}`)
+      const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+      const response = await fetch(`${API_BASE_URL}/admin-supabase/dashboard?store=siddhi&period=${timeFilter}`)
       const data = await response.json()
       if (data.success && data.data) {
         // Force re-render by updating the component
