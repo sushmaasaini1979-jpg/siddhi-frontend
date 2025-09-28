@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -18,7 +19,7 @@ export const useRealtimeOrders = (storeSlug = 'siddhi') => {
     const fetchOrders = async () => {
       try {
         console.log('🔄 Fetching orders from backend API...')
-        const response = await fetch(`/api/admin-supabase/orders?store=${storeSlug}`)
+        const response = await fetch(`${API_BASE_URL}/admin-supabase/orders?store=${storeSlug}`)
         const data = await response.json()
         
         if (data.success && data.orders) {
@@ -67,7 +68,7 @@ export const useRealtimeCustomers = (storeSlug = 'siddhi') => {
     const fetchCustomers = async () => {
       try {
         console.log('🔄 Fetching customers from backend API...')
-        const response = await fetch(`/api/admin-supabase/customers?store=${storeSlug}`)
+        const response = await fetch(`${API_BASE_URL}/admin-supabase/customers?store=${storeSlug}`)
         const data = await response.json()
         
         if (data.success && data.customers) {
@@ -119,7 +120,7 @@ export const useRealtimeCoupons = (storeSlug = 'siddhi') => {
     const fetchCoupons = async () => {
       try {
         console.log('🔄 Fetching coupons from backend API...')
-        const response = await fetch(`/api/admin-supabase/coupons?store=${storeSlug}`)
+        const response = await fetch(`${API_BASE_URL}/admin-supabase/coupons?store=${storeSlug}`)
         const data = await response.json()
         
         if (data.success && data.coupons) {
@@ -170,7 +171,7 @@ export const useRealtimeDashboard = (storeSlug = 'siddhi', timeFilter = 'today')
     const fetchDashboard = async () => {
       try {
         console.log('🔄 Fetching dashboard data from backend API...', { storeSlug, timeFilter })
-        const response = await fetch(`/api/admin-supabase/dashboard?store=${storeSlug}&period=${timeFilter}`)
+        const response = await fetch(`${API_BASE_URL}/admin-supabase/dashboard?store=${storeSlug}&period=${timeFilter}`)
         const data = await response.json()
         
         if (data.success && data.data) {
